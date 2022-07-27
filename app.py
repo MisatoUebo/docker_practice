@@ -3,12 +3,14 @@ from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 
 from view1 import bp
+from view2 import bp2
 
 # Flaskのインスタンスを生成
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 
 app.register_blueprint(bp)
+app.register_blueprint(bp2)
 
 # 「http://localhost:8000/」にアクセスしたら「index()を実行する」という意味
 @app.route('/')

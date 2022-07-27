@@ -1,9 +1,30 @@
-<html>
-<head>
-<title>{{ title }}</title>
-</head>
-<body>
-Hello
-{{ name }}さん。
-</body>
-</html>
+{% extends "bootstrap/base.html" %}
+
+{% block title %}学習内容メモページ{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <!-- JQuery -->
+    <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="/static/js/script.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <div class="page-header">
+        <h1>🥹Docker・Flack学習内容記録ページ🥹</h1>
+    </div>
+
+    <div id="20220727">
+        <h3>2022/07/27 学習内容</h3>
+
+        <p id = "text">
+            <li>FlaskのBluePrint機能を使うために、Pythonのコード分けた。</li>
+            <li>View1.py・View2.pyを追加</li>
+        </p>
+        </p>
+    </div>
+
+</div>
+{% endblock %}

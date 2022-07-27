@@ -2,11 +2,11 @@
 from flask import Flask, render_template,Blueprint
 from flask_bootstrap import Bootstrap
 
-bp = Blueprint('view2', __name__, url_prefix='/<name>')
+bp2 = Blueprint('view2', __name__, url_prefix='/prc')
 
-@bp.route("/")
-def hello(name):
-    return render_template('hello.html', title='呼び出し側でタイトル設定', name=name)
+@bp2.route("/")
+def hello():
+    return render_template('hello.html')
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=8000)
