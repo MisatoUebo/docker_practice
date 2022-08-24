@@ -31,7 +31,12 @@
 
         <p id = "text">
             <li>(最初の頃に見本を見てやってた)URL叩く時に値渡せるようにしてたのを復活させた</li>
-            <li>ここに表示されます → {{parameter}}</li>
+
+            {% if parameter %}
+            <li>ここに表示されます。 → {{parameter}}</li>
+            {% else %}
+            <li>入力していません。</li>
+            {% endif %}
         </p>
         </p>
     </div>

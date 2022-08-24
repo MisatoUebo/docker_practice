@@ -4,8 +4,9 @@ from flask_bootstrap import Bootstrap
 
 bp2 = Blueprint('view2', __name__, url_prefix='/prc')
 
+@bp2.route("/")
 @bp2.route("/<parameter>")
-def hello(parameter):
+def hello(parameter=None):
     return render_template('hello.html',parameter=parameter)
 
 if __name__ == "__main__":
