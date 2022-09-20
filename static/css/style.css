@@ -1,17 +1,25 @@
 h1 {
-    margin: 30px;
     background: #dfefff;
     box-shadow: 0px 0px 0px 5px #dfefff;
     border: dashed 2px white;
     text-align:center;
     padding:10px 0;
-  }
+}
+
+h2 {
+  text-align:left;
+}
 
   /* サイト全体のフォント指定 */
 body {
   font-family: '07やさしさゴシック','Noto Emoji', sans-serif;
+  margin: 30px;
   }
 
 div {
-  margin: 30px;
+  margin: 40px 0px;
+}
+
+label {
+  margin: 20px 0px;
 }

@@ -1,5 +1,5 @@
 # Flaskを利用するのでインポート
-from flask import Flask, render_template
+from flask import Flask, render_template,request
 from flask_bootstrap import Bootstrap
 
 from view1 import bp
@@ -16,6 +16,20 @@ app.register_blueprint(bp2)
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/result', methods=["GET"])
+def result_get():
+    # GET送信の処理
+    last_name = request.args.get("last_name","")
+    first_name = request.args.get("first_name","")
+    return render_template('result.html', last_name=last_name, first_name=first_name)
+
+@app.route('/result', methods=["POST"])
+def result_post():
+    # POST送信の処理
+    last_name = request.form["last_name"]
+    first_name = request.form["first_name"]
+    return render_template('result.html', last_name=last_name, first_name=first_name)
 
 # # 「http://localhost:8000/○○」にアクセスしたら「hello(name)を実行する」という意味
 # # 「hello.html」ファイルにパラメータ2つを渡している
