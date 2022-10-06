@@ -17,3 +17,4 @@ EXPOSE 8000
 CMD ["python", "app.py"]
 
 RUN pip install flask-bootstrap4
+RUN pip install flask-sqlalchemy

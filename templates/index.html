@@ -15,14 +15,39 @@
 
     <h2>POST・GET送信やってみた</h2>
 
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>タスク名</th>
+                    <th>期限</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in lists %}
+                <tr>
+                    <th>{{item.id}}</th>
+                    <th>{{item.todo}}</th>
+                    <th>{{item.date}}</th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div> 
+
     <form action='/result'>
-        <p>下に名前を入力してください！</p>
-        <label for="last_name">名字: </label><input type="text" name="last_name"><br>
-        <label for="first_name">名前: </label><input type="text" name="first_name">
-        <div>
-            <button type="submit" formmethod="GET">GET送信</button>
-            <button type="submit" formmethod="POST">POST送信</button>
-        </div>
+        <p>＜新規登録＞</p>
+        <label>
+            タスク名    
+            <input type="text" name="todo">
+        </label>
+        <label >
+            期限
+            <input type="text" name="date">       
+        </label>
+        <button type="submit" formmethod="POST">登録</button>
+    </form>
 
     </form>
 </html>

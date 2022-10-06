@@ -7,7 +7,19 @@ services:
      - "8000:8000"
    volumes:
      - "./flask:/opt/flask"
+   # dbを構築してからwebを構築する
+   depends_on:
+     - db
+   links:
+     - db
    tty: true
    environment:
      TZ: Asia/Tokyo
    command: flask run --host 0.0.0.0 --port 8000
+
+ db:
+   image: mysql:5.7
+   volumes:
+     - ./mysql_data:/var/lib/mysql # MySQLデータベース保管場所
+   restart: always
+   env_file: .env # 環境変数の定義に.envを利用

@@ -23,3 +23,8 @@ div {
 label {
   margin: 20px 0px;
 }
+
+table th,
+table td {
+    padding: 8px;
+}
