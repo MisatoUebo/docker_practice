@@ -21,5 +21,6 @@ services:
    image: mysql:5.7
    volumes:
      - ./mysql_data:/var/lib/mysql # MySQLデータベース保管場所
+     - ./init:/docker-entrypoint-initdb.d:ro # このディレクトリにあるsh/sqlファイルがコンテナup時に自動実行される
    restart: always
    env_file: .env # 環境変数の定義に.envを利用

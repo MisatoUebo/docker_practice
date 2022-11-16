@@ -1,9 +1,9 @@
 # Flaskを利用するのでインポート
 from flask import Flask,render_template,request,redirect
 from flask_bootstrap import Bootstrap
+import pymysql
 # SQLAlchemyをインポート
 from flask_sqlalchemy import SQLAlchemy
-import os
 
 # base_dir = os.path.dirname(__file__)  # このmodel.pyを配置しているディレクトリのパス
 
@@ -30,25 +30,52 @@ db = SQLAlchemy(app)
 # class ToDo(db.Model):で、dbのModelを継承したテーブルのクラスを定義しています。
 # idの部分でprimary_key=Trueにしているのは、このidというのを主キーとして作成するよ、という指定です。
 # データベースの中で同じ値のものがあっても区別ができるように一意のデータを各レコード（行）に持たせておかないといけないので、このidというデータにその役割を持たせています。
-class ToDo(db.Model):
+""" class ToDo(db.Model):
     __tablename__ = 'ToDo'
     id = db.Column(db.Integer,primary_key=True)
     todo = db.Column(db.String(128),nullable=False)
-    date = db.Column(db.String)
+    date = db.Column(db.String) """
+    # date = db.Column(db.DateTime,default=datetime.now(pytz.timezone('Asia/Tokyo')))
 
-@app.before_first_request
-def init():
-    db.create_all()
+def getConnection():
+    return pymysql.connect(
+        host='localhost',
+        db='mydb',
+        user='root',
+        password='misato',
+        charset='utf8',
+        cursorclass=pymysql.cursors.DictCursor
+    )
+
+# @app.before_first_request
+# def init():
+#     db.create_all()
+
+@app.route('/')
+def select_sql():
+    connection = getConnection()
+    message = "Hello world"
+
+    sql = "SELECT * FROM players"
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    players = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+
+    return render_template('view.html', message = message, players = players)
+
 
 # 「http://localhost:8000/」にアクセスしたら「index()を実行する」という意味
-@app.route('/', methods=["GET"])
+""" @app.route('/', methods=["GET"])
 def index():
     # GET送信の処理
     datas = ToDo.query.all()
 
     # last_name = request.args.get("last_name","")
     # first_name = request.args.get("first_name","")
-    return render_template('index.html', lists = datas)
+    return render_template('index.html', lists = datas) """
 
 @app.route('/result', methods=["POST"])
 def result_post():

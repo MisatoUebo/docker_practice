@@ -24,7 +24,13 @@
                     <th>期限</th>
                 </tr>
             </thead>
+
             <tbody>
+                {% for item in lists %}
+                <p>{{ item }}</p>
+                {% endfor %}
+            </tbody>
+            <!-- <tbody>
                 {% for item in lists %}
                 <tr>
                     <th>{{item.id}}</th>
@@ -32,7 +38,7 @@
                     <th>{{item.date}}</th>
                 </tr>
                 {% endfor %}
-            </tbody>
+            </tbody> -->
         </table>
     </div> 
 

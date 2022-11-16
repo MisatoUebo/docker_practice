@@ -18,3 +18,7 @@ CMD ["python", "app.py"]
 
 RUN pip install flask-bootstrap4
 RUN pip install flask-sqlalchemy
+RUN pip install SQLAlchemy
+RUN pip install mysql
+RUN pip install mysqlclient
+RUN pip install pymysql
