@@ -1,0 +1,13 @@
+flask
+flask-restful
+sqlalchemy_utils
+flask-migrate
+pymysql
+#gunicorn
+#flask_marshmallow
+#marshmallow-sqlalchemy
+flask-bootstrap4
+flask-sqlalchemy
+SQLAlchemy
+mysql
+mysqlclient
