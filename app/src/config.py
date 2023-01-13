@@ -8,11 +8,10 @@ class SystemConfig:
     DEBUG = True
 
     # SQLAlchemy
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{user}:{password}@{host}:{port}/{db_name}?charset=utf8'.format(**{
-        'user': 'root',
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{user}:{password}@{host}/{db_name}?charset=utf8'.format(**{
+        'user': 'misato',
         'password': 'password',
         'host': 'localhost',
-        'port': 3306,
         'db_name':'todo'
     })
     SQLALCHEMY_TRACK_MODIFICATIONS = False

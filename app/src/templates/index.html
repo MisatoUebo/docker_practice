@@ -5,9 +5,10 @@
     <body>
     <h1>Webアプリ初心者のFlaskチュートリアル</h1>
     
-    <!-- {% todo player in user %}
-        <p>{{ todo }}</p>
-    {% endfor %} -->
+    {% for user in users %}
+    <p>id : {{ user.id }}</p>
+    <p>name : {{ user.name }}</p>
+    {% endfor %}
 
     </body>
 </html>

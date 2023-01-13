@@ -2,14 +2,6 @@
 from flask import Flask,render_template
 from database import init_db,db
 from models import Todo
-#from flask_sqlalchemy import SQLAlchemy
-#from flask_migrate import Migrate  # 追加
-
-#Flaskオブジェクトの生成
-#app = Flask(__name__)
-
-#db = SQLAlchemy()
-#migrate = Migrate(app, db)
 
 def create_app():
     app = Flask(__name__)
@@ -18,22 +10,35 @@ def create_app():
     init_db(app)
 
 #「/」へアクセスがあった場合に、"Hello World"の文字列を返す
-# @app.route("/")
-# def hello():
-#     return "Hello World"
+    @app.route("/")
+    def hello():
+        return "Hello World"
 
 
 #「/index」へアクセスがあった場合に、「index.html」を返す
-    @app.route("/index")
-    def index():
+    @app.route("/show")
+    def show():
+
         '''
-        res = db.session.query(Todo).all()
-        for user in res:
-            return render_template('index.html',user=user)
+        all_peter = Todo.query.filter_by(name='uebo').all()
+        how_many_peter = len(all_peter)
+        return '今ueboは{}人います'.format(how_many_peter)
+
+        '''
+        users = Todo.query.all()
+        return render_template('index.html',users=users)
+
+        '''
+        return "indexのページ"
         '''
 
-        return "indexのページ"
-        
+    @app.route('/add')
+    def add():
+        uebo = Todo(id=1,name='uebo')
+        db.session.add(uebo)
+        db.session.commit()
+        return 'ueboを増やしました。'
+
     return app
 
 app = create_app()
@@ -41,16 +46,3 @@ app = create_app()
 #おまじない
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
-# def create_app():
-#   app = Flask(__name__)
-#   app.config.from_object('src.config.Config')
-
-#   init_db(app)
-
-#   return app
-
-
-# app = create_app()
