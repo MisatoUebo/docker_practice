@@ -18,23 +18,12 @@ def create_app():
 #「/index」へアクセスがあった場合に、「index.html」を返す
     @app.route("/show")
     def show():
-
-        '''
-        all_peter = Todo.query.filter_by(name='uebo').all()
-        how_many_peter = len(all_peter)
-        return '今ueboは{}人います'.format(how_many_peter)
-
-        '''
         users = Todo.query.all()
         return render_template('index.html',users=users)
 
-        '''
-        return "indexのページ"
-        '''
-
     @app.route('/add')
     def add():
-        uebo = Todo(id=1,name='uebo')
+        uebo = Todo(name='uebo')
         db.session.add(uebo)
         db.session.commit()
         return 'ueboを増やしました。'

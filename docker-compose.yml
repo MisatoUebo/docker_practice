@@ -18,6 +18,11 @@ services:
     FLASK_DEBUG : "1"    #デバッグモードON
     FLASK_APP: 'run.py'         #起動用アプリの設定
    command: flask run -h 0.0.0.0
+   networks:
+    app_net:
+      ipv4_address: 192.168.160.3
+   extra_hosts: 
+      - "host.docker.internal:host-gateway"
 
  db:
    build: ./mysql/
@@ -34,3 +39,15 @@ services:
      - MYSQL_PASSWORD=password
    ports:
      - 3306:3306
+   networks:
+    app_net:
+      ipv4_address: 192.168.160.2
+
+networks:
+  app_net:
+    driver: bridge
+    name: app_net
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.160.2/20  

@@ -11,7 +11,7 @@ class SystemConfig:
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{user}:{password}@{host}/{db_name}?charset=utf8'.format(**{
         'user': 'misato',
         'password': 'password',
-        'host': 'localhost',
+        'host': '192.168.160.2',
         'db_name':'todo'
     })
     SQLALCHEMY_TRACK_MODIFICATIONS = False

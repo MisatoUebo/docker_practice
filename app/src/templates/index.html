@@ -1,14 +1,32 @@
 <!--DOCTYPE html -->
 <html>
-    <head>
-    </head>
-    <body>
-    <h1>Webアプリ初心者のFlaskチュートリアル</h1>
-    
-    {% for user in users %}
-    <p>id : {{ user.id }}</p>
-    <p>name : {{ user.name }}</p>
-    {% endfor %}
 
-    </body>
+<head>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <h1>Webアプリ初心者のFlaskチュートリアル</h1>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>名前</th>
+            <th>作成日</th>
+            <th>更新日</th>
+        </tr>
+
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.createTime }}</td>
+            <td>{{ user.updateTime }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+
 </html>
