@@ -28,6 +28,18 @@ def create_app():
         db.session.commit()
         return 'ueboを増やしました。'
 
+    @app.route('/delete')
+    def delete():
+        id = 1
+        record_to_delete = db.session.query(Todo).filter_by(id=id).first()
+
+        if record_to_delete is not None:
+            db.session.delete(perecord_to_deleteter)
+            db.session.commit()
+            return 'ID:1を削除しました'
+        else:
+            return '該当するデータはありません'
+
     return app
 
 app = create_app()
