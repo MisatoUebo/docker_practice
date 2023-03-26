@@ -1,0 +1,39 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <h1>ユーザー削除画面</h1>
+
+    <p>現在登録されているユーザーの一覧です。</p>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>名前</th>
+            <th>作成日</th>
+            <th>更新日</th>
+        </tr>
+
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.createTime }}</td>
+            <td>{{ user.updateTime }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p>下記に削除したいユーザーIDを入力してください。</p>
+
+    <form method="POST" action="/delete">
+        <label for="text">削除したいユーザーID :</label>
+        <input type="number" name="id"><br><br>
+        <input type="submit" value="削除">
+    </form>
+</body>
+
+</html>
