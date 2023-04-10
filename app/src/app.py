@@ -1,5 +1,5 @@
 #Flaskとrender_template（HTMLを表示させるための関数）をインポート
-from flask import Flask,render_template
+from flask import Flask,render_template,redirect
 from database import init_db,db
 from models import Todo
 from flask import request
@@ -55,6 +55,17 @@ def create_app():
         else:
             return '該当するデータはありません'
 
+    @app.route("/<int:id>/update",methods=["GET","POST"])
+    def update(id):
+        post = Todo.query.filter(Todo.id == id).first()
+        if request.method == "GET":
+            return render_template("update.html",post=post)
+        
+        else:
+            post.name=request.form.get("name")
+            db.session.commit()
+            return redirect("/show")
+    
     return app
 
 app = create_app()
