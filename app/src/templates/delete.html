@@ -1,12 +1,7 @@
-<html>
+<!-- layout.htmlをテンプレートに拡張する-->
+{% extends "layout.html" %}
 
-<head>
-    <link rel="stylesheet" href="../static/style.css">
-</head>
-
-<body>
-    <h1>ユーザー削除画面</h1>
-
+{% block content %}
     <p>現在登録されているユーザーの一覧です。</p>
 
     <table>
@@ -34,6 +29,4 @@
         <input type="number" name="id"><br><br>
         <input type="submit" value="削除">
     </form>
-</body>
-
-</html>
+    {% endblock %}

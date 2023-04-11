@@ -1,19 +1,12 @@
-<html>
+<!-- layout.htmlをテンプレートに拡張する-->
+{% extends "layout.html" %}
 
-<head>
-    <link rel="stylesheet" href="../static/style.css">
-</head>
+{% block content %}
+<p>下記に追加したいユーザー名を入力してください。</p>
 
-<body>
-    <h1>ユーザー追加画面</h1>
-
-    <p>下記に追加したいユーザー名を入力してください。</p>
-
-    <form method="POST" action="/add">
-        <label for="text">追加したいユーザー名:</label>
-        <input type="text" name="userName"><br><br>
-        <input type="submit" value="追加">
-    </form>
-</body>
-
-</html>
+<form method="POST" action="/add">
+    <label for="text">追加したいユーザー名:</label>
+    <input type="text" name="userName"><br><br>
+    <input type="submit" value="追加">
+</form>
+{% endblock %}

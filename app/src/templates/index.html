@@ -1,13 +1,10 @@
 <!--DOCTYPE html -->
 <html>
 
-<head>
-    <link rel="stylesheet" href="../static/style.css">
-</head>
+<!-- layout.htmlをテンプレートに拡張する-->
+{% extends "layout.html" %}
 
-<body>
-    <h1>Webアプリ初心者のFlaskチュートリアル</h1>
-
+{% block content %}
     <table>
         <tr>
             <th>ID</th>
@@ -27,7 +24,4 @@
         {% endfor %}
 
     </table>
-
-</body>
-
-</html>
+{% endblock %}
