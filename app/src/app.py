@@ -20,15 +20,11 @@ def create_app():
     @app.route("/show")
     def show():
         users = Todo.query.all()
-        return render_template('index.html',users=users)
+        return render_template('index.html',title = "ユーザー一覧画面",users=users)
 
     @app.route('/add')
     def add():
-        return render_template('add.html')
-        # uebo = Todo(name='uebo')
-        # db.session.add(uebo)
-        # db.session.commit()
-        # return 'ueboを増やしました。'
+        return render_template('add.html',title = "ユーザー追加画面")
 
     @app.route('/add', methods=['POST'])
     def postAdd():
@@ -41,7 +37,7 @@ def create_app():
     @app.route('/delete')
     def delete():
         users = Todo.query.all()
-        return render_template('delete.html',users=users)
+        return render_template('delete.html',title="ユーザー削除画面",users=users)
 
     @app.route('/delete', methods=['POST'])
     def postDelete():
@@ -59,7 +55,7 @@ def create_app():
     def update(id):
         post = Todo.query.filter(Todo.id == id).first()
         if request.method == "GET":
-            return render_template("update.html",post=post)
+            return render_template("update.html",title="ユーザー情報編集画面",post=post)
         
         else:
             post.name=request.form.get("name")
