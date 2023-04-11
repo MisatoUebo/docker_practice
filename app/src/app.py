@@ -22,34 +22,33 @@ def create_app():
         users = Todo.query.all()
         return render_template('index.html',title = "ユーザー一覧画面",users=users)
 
-    @app.route('/add')
+    @app.route('/add', methods=["GET","POST"])
     def add():
-        return render_template('add.html',title = "ユーザー追加画面")
-
-    @app.route('/add', methods=['POST'])
-    def postAdd():
-        userData = request.form.get('userName') # hoge
-        userName = Todo(name=userData)
-        db.session.add(userName)
-        db.session.commit()
-        return '新規ユーザーを追加しました。'
-
-    @app.route('/delete')
-    def delete():
-        users = Todo.query.all()
-        return render_template('delete.html',title="ユーザー削除画面",users=users)
-
-    @app.route('/delete', methods=['POST'])
-    def postDelete():
-        userData = request.form.get('id') 
-        record_to_delete = db.session.query(Todo).filter_by(id=userData).first()
-
-        if record_to_delete is not None:
-            db.session.delete(record_to_delete)
-            db.session.commit()
-            return f'ID:{userData}を削除しました'
+        if request.method == "GET":
+            return render_template("add.html",title="ユーザー追加画面")
         else:
-            return '該当するデータはありません'
+            userData = request.form.get('userName') # hoge
+            userName = Todo(name=userData)
+            db.session.add(userName)
+            db.session.commit()
+            return redirect("/show")
+
+    @app.route('/delete', methods=["GET","POST"])
+    def postDelete():
+
+        if request.method == "GET":
+            users = Todo.query.all()
+            return render_template('delete.html',title="ユーザー削除画面",users=users)
+        else:
+            userData = request.form.get('id') 
+            record_to_delete = db.session.query(Todo).filter_by(id=userData).first()
+
+            if record_to_delete is not None:
+                db.session.delete(record_to_delete)
+                db.session.commit()
+                return f'ID:{userData}を削除しました'
+            else:
+                return '該当するデータはありません'
 
     @app.route("/<int:id>/update",methods=["GET","POST"])
     def update(id):

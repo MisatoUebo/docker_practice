@@ -5,9 +5,20 @@
     <title>{{ title }}</title>
 </head>
 <body>
-    <h1>Webアプリ初心者のFlaskチュートリアル</h1>
+    <h1 class="layout-title">Webアプリ初心者のFlaskチュートリアル</h1>
+
+    <nav>
+        <ul class="main-menu">
+        <li><a href="/show">データ一覧</a></li>
+        <li><a href="/add">新規データ追加</a></li>
+        <li><a href="/delete">登録データ削除</a></li>
+        </ul>
+    </nav>
     {% block content %}
     <!-- main-->
     {% endblock %}
 </body>
+<footer>
+    <p>Copyright (C)</p>
+</footer>
 </html>
