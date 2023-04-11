@@ -8,3 +8,53 @@ table th{
     text-align: left;
     padding: 5px;
 }
+
+/* ----- layout.html ナビゲーションバー部分 ----- */
+/* 要素の幅が中身と同じになり、要素を横並びにする */
+.main-menu li{
+    display: inline-block;
+    width: 150px;
+}
+/* リスト先頭のマークを無しにする */
+.main-menu {
+    list-style-type: none;
+    margin: 0px;
+    padding: 10px;
+    }
+/* リンクの下線を無しにする */
+.main-menu li a{
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    }
+
+/* メニューとしての形を整えるために簡単な装飾 */
+    nav{
+        text-align: center;
+        background: #fff2e3;
+        }
+        
+        nav ul li a:hover{
+        color: orange;
+        }
+
+.layout-title{
+    font-size: 30px;
+    text-align: center;
+}
+
+body {
+    width: 100%;
+    /* max-width: 1280px; */
+    margin: auto;
+}
+
+footer{
+    position: absolute;/*←絶対位置*/
+    bottom: 0; /*下に固定*/
+    text-align: center;
+    background: #fff2e3;
+    width: 100%;
+    /* max-width: 1280px; */
+    margin: auto;
+}
