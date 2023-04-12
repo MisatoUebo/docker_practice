@@ -1,5 +1,5 @@
 #Flaskとrender_template（HTMLを表示させるための関数）をインポート
-from flask import Flask,render_template,redirect
+from flask import Flask,render_template,redirect,flash
 from database import init_db,db
 from models import Todo
 from flask import request
@@ -40,15 +40,23 @@ def create_app():
             users = Todo.query.all()
             return render_template('delete.html',title="ユーザー削除画面",users=users)
         else:
-            userData = request.form.get('id') 
-            record_to_delete = db.session.query(Todo).filter_by(id=userData).first()
+            if request.form.get("id") == "":
+                flash("削除したいIDを入力してください", "failed")
+                users = Todo.query.all()
 
-            if record_to_delete is not None:
-                db.session.delete(record_to_delete)
-                db.session.commit()
-                return f'ID:{userData}を削除しました'
-            else:
-                return '該当するデータはありません'
+            if request.form.get("id"):
+                userData = request.form.get('id') 
+                record_to_delete = db.session.query(Todo).filter_by(id=userData).first()
+                if record_to_delete is not None:
+                    db.session.delete(record_to_delete)
+                    db.session.commit()
+                    flash(f'ID:{userData}を削除しました。', "success")
+                else:
+                    flash("該当するデータはありません", "failed")
+                
+                users = Todo.query.all()
+            
+            return render_template("delete.html",users=users)
 
     @app.route("/<int:id>/update",methods=["GET","POST"])
     def update(id):
