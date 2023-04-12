@@ -30,4 +30,16 @@
         <input type="number" name="id"><br><br>
         <input type="submit" value="削除">
     </form>
+
+    <!-- flashメッセージの表示 -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flash-message">
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
     {% endblock %}
