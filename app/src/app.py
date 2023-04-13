@@ -10,14 +10,8 @@ def create_app():
     
     init_db(app)
 
-#「/」へアクセスがあった場合に、"Hello World"の文字列を返す
+#「/」へアクセスがあった場合に、「index.html」を返す
     @app.route("/")
-    def hello():
-        return "Hello World"
-
-
-#「/index」へアクセスがあった場合に、「index.html」を返す
-    @app.route("/show")
     def show():
         users = Todo.query.all()
         return render_template('index.html',title = "ユーザー一覧画面",users=users)
@@ -31,7 +25,7 @@ def create_app():
             userName = Todo(name=userData)
             db.session.add(userName)
             db.session.commit()
-            return redirect("/show")
+            return redirect("/")
 
     @app.route('/delete', methods=["GET","POST"])
     def postDelete():
@@ -67,7 +61,7 @@ def create_app():
         else:
             post.name=request.form.get("name")
             db.session.commit()
-            return redirect("/show")
+            return redirect("/")
     
     return app
 
