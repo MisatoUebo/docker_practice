@@ -54,6 +54,19 @@ body {
     margin: auto;
 }
 
+.date-group{
+    display:flex;
+}
+
+.date-group p{
+    padding-right: 10px;
+}
+
+hr{
+    border: none;
+    border-top: 2px dotted #999999;
+}
+
 footer{
     position: absolute;/*←絶対位置*/
     bottom: 0; /*下に固定*/

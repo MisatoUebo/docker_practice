@@ -5,7 +5,9 @@ class Todo(db.Model):
   __tablename__ = 'todos'
 
   id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-  name = db.Column(db.String(255))
+  # name = db.Column(db.String(255))
+  body = db.Column(db.String(50))
+  title = db.Column(db.String(300))
   #state = db.Column(db.String(255), nullable=False , primary_key=True)
 
   createTime = db.Column(db.DateTime, nullable=False, default=datetime.now , primary_key=True)
@@ -13,4 +15,4 @@ class Todo(db.Model):
 
   def __repr__(self):
       return '<Todo id={id} name={name}>'.format(
-              id=self.id, name=self.name)
+              id=self.id, body=self.body, title=self.title)

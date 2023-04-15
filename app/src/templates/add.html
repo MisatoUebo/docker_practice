@@ -3,11 +3,17 @@
 
 {% block content %}
 <h2>新規ユーザーの登録</h2>
-<p>下記に追加したいユーザー名を入力してください。</p>
 
 <form method="POST" action="/add">
-    <label for="text">追加したいユーザー名:</label>
-    <input type="text" name="userName"><br><br>
+    <div class="form-group">
+        <label for="title">タイトル</label><br>
+        <input type="text" name="title">
+    </div>
+    <div class="form-group">
+        <label for="body">本文</label><br>
+        <textarea name="body" rows="30" cols="100"></textarea>
+    </div>
+
     <input type="submit" value="追加">
 </form>
 {% endblock %}

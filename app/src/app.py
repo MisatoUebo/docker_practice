@@ -14,15 +14,16 @@ def create_app():
     @app.route("/")
     def show():
         users = Todo.query.all()
-        return render_template('index.html',title = "ユーザー一覧画面",users=users)
+        return render_template('index.html',pageTitle = "ユーザー一覧画面",users=users)
 
     @app.route('/add', methods=["GET","POST"])
     def add():
         if request.method == "GET":
-            return render_template("add.html",title="ユーザー追加画面")
+            return render_template("add.html",pageTitle="ユーザー追加画面")
         else:
-            userData = request.form.get('userName') # hoge
-            userName = Todo(name=userData)
+            title = request.form.get('title') # hoge
+            body = request.form.get('body') # hoge
+            userName = Todo(title=title , body=body)
             db.session.add(userName)
             db.session.commit()
             return redirect("/")
@@ -32,7 +33,7 @@ def create_app():
 
         if request.method == "GET":
             users = Todo.query.all()
-            return render_template('delete.html',title="ユーザー削除画面",users=users)
+            return render_template('delete.html',pageTitle="ユーザー削除画面",users=users)
         else:
             if request.form.get("id") == "":
                 flash("削除したいIDを入力してください", "failed")
@@ -56,12 +57,18 @@ def create_app():
     def update(id):
         post = Todo.query.filter(Todo.id == id).first()
         if request.method == "GET":
-            return render_template("update.html",title="ユーザー情報編集画面",post=post)
+            return render_template("update.html",pageTitle="ユーザー情報編集画面",post=post)
         
         else:
-            post.name=request.form.get("name")
+            post.title=request.form.get("title")
             db.session.commit()
             return redirect("/")
+        
+    @app.route("/<int:id>/contents",methods=["GET"])
+    def showContents(id):
+        post = Todo.query.filter(Todo.id == id).first()
+        if request.method == "GET":
+            return render_template("contents.html",pageTitle="内容",post=post)
     
     return app
 

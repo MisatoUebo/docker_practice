@@ -4,8 +4,8 @@
 {% block content %}
 <h2>登録情報の更新</h2>
     <form method="POST">
-        <label for="body">名前</label>
-        <input type="text" name="name" value={{post.name}}>
+        <label>タイトル</label>
+        <input type="text" name="title" value={{post.title}}>
         <input type="submit" value="更新">
     </form>
 {% endblock %}

@@ -8,7 +8,7 @@
     <table>
         <tr>
             <th>ID</th>
-            <th>名前</th>
+            <th>タイトル</th>
             <th>作成日</th>
             <th>更新日</th>
         </tr>
@@ -16,7 +16,7 @@
         {% for user in users %}
         <tr>
             <td>{{ user.id }}</td>
-            <td>{{ user.name }}</td>
+            <td>{{ user.title }}</td>
             <td>{{ user.createTime }}</td>
             <td>{{ user.updateTime }}</td>
         </tr>
