@@ -3,6 +3,7 @@ from flask import Flask,render_template,redirect,flash
 from database import init_db,db
 from models import Todo
 from flask import request
+import datetime
 
 def create_app():
     app = Flask(__name__)
@@ -14,12 +15,12 @@ def create_app():
     @app.route("/")
     def show():
         users = Todo.query.all()
-        return render_template('index.html',pageTitle = "ユーザー一覧画面",users=users)
+        return render_template('index.html',pageTitle = "ブログ一覧",users=users)
 
     @app.route('/add', methods=["GET","POST"])
     def add():
         if request.method == "GET":
-            return render_template("add.html",pageTitle="ユーザー追加画面")
+            return render_template("add.html",pageTitle="ブログ記事作成")
         else:
             title = request.form.get('title') # hoge
             body = request.form.get('body') # hoge
@@ -33,7 +34,7 @@ def create_app():
 
         if request.method == "GET":
             users = Todo.query.all()
-            return render_template('delete.html',pageTitle="ユーザー削除画面",users=users)
+            return render_template('delete.html',pageTitle="ブログ記事削除",users=users)
         else:
             if request.form.get("id") == "":
                 flash("削除したいIDを入力してください", "failed")
@@ -57,10 +58,11 @@ def create_app():
     def update(id):
         post = Todo.query.filter(Todo.id == id).first()
         if request.method == "GET":
-            return render_template("update.html",pageTitle="ユーザー情報編集画面",post=post)
+            return render_template("update.html",pageTitle="ブログ記事編集",post=post)
         
         else:
             post.title=request.form.get("title")
+            post.body=request.form.get("body")
             db.session.commit()
             return redirect("/")
         

@@ -2,8 +2,8 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h2>登録内容の削除</h2>
-    <p>現在登録されているユーザーの一覧です。</p>
+<h2>ブログ記事の削除</h2>
+    <p>現在登録されている記事の一覧です。</p>
 
     <table>
         <tr>
@@ -23,10 +23,10 @@
         {% endfor %}
     </table>
 
-    <p>下記に削除したいユーザーIDを入力してください。</p>
+    <p>下記に削除したいIDを入力してください。</p>
 
     <form method="POST" action="/delete">
-        <label for="text">削除したいユーザーID :</label>
+        <label for="text">削除したいID :</label>
         <input type="number" name="id"><br><br>
         <input type="submit" value="削除">
     </form>
