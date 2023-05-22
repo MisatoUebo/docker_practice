@@ -8,6 +8,7 @@ class Todo(db.Model):
   # name = db.Column(db.String(255))
   body = db.Column(db.String(50))
   title = db.Column(db.String(300))
+  image_url = db.Column(db.String(120))
   #state = db.Column(db.String(255), nullable=False , primary_key=True)
 
   createTime = db.Column(db.DateTime, nullable=False, default=datetime.now , primary_key=True)
@@ -15,4 +16,4 @@ class Todo(db.Model):
 
   def __repr__(self):
       return '<Todo id={id} name={name}>'.format(
-              id=self.id, body=self.body, title=self.title)
+              id=self.id, body=self.body, image_url=self.image_url, title=self.title)
