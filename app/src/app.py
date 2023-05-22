@@ -36,11 +36,10 @@ def create_app():
         elif request.method == "POST":
             title = request.form.get("title")
             body = request.form.get("body")
-            # image_Url = request.form.get("imageUrl")
 
             # ファイルがなかった場合の処理
             if "file" not in request.files:
-                userData = Todo(title=title , body=body,image_url="No File.")
+                userData = Todo(title=title , body=body,image_url="No File")
 
                 db.session.add(userData)
                 db.session.commit()
@@ -55,10 +54,6 @@ def create_app():
                 # ファイルの保存
                 file.save(os.path.join(UPLOAD_FOLDER, filename))
                 userData = Todo(title=title , body=body,image_url=filename)
-
-            # else:
-            #     file.save(os.path.join("./static/image", file.filename))
-            #     userData = Todo(title=title , body=body,image_url=file.filename)
             
             db.session.add(userData)
             db.session.commit()
