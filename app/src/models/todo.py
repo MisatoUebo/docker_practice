@@ -1,5 +1,6 @@
 from datetime import datetime
 from database import db
+from sqlalchemy.dialects import postgresql as pg
 
 class Todo(db.Model):
   __tablename__ = 'todos'
@@ -9,6 +10,7 @@ class Todo(db.Model):
   body = db.Column(db.String(50))
   title = db.Column(db.String(300))
   image_url = db.Column(db.String(120))
+  tags = db.Column(pg.ARRAY(db.String), nullable=False,default=False)
   #state = db.Column(db.String(255), nullable=False , primary_key=True)
 
   createTime = db.Column(db.DateTime, nullable=False, default=datetime.now , primary_key=True)

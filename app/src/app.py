@@ -3,6 +3,7 @@ from flask import Flask,render_template,redirect,flash
 from database import init_db,db
 from models import Todo
 from flask import request
+
 # ファイル名をチェックする関数
 from werkzeug.utils import secure_filename
 import datetime
@@ -39,25 +40,37 @@ def create_app():
 
             # ファイルがなかった場合の処理
             if "file" not in request.files:
-                userData = Todo(title=title , body=body,image_url="No File")
+                filename = "No selected file"
+                userData = Todo(title=title , body=body,image_url=filename)
 
                 db.session.add(userData)
                 db.session.commit()
                 return redirect("/")
-
+            
             # データの取り出し
             file = request.files["file"]
+
+            if file.filename == '':
+                filename = "No selected file"
+                userData = Todo(title=title , body=body,image_url=filename)
+            
+                db.session.add(userData)
+                db.session.commit()
+                return redirect("/")
 
             if file and allwed_file(file.filename):
                 # 危険な文字を削除（サニタイズ処理）
                 filename = secure_filename(file.filename)
                 # ファイルの保存
                 file.save(os.path.join(UPLOAD_FOLDER, filename))
+            
                 userData = Todo(title=title , body=body,image_url=filename)
             
-            db.session.add(userData)
-            db.session.commit()
-            return redirect("/")
+                db.session.add(userData)
+                db.session.commit()
+                return redirect("/")
+            
+
 
     @app.route("/delete", methods=["GET","POST"])
     def postDelete():
@@ -107,7 +120,7 @@ def create_app():
         # .があるかどうかのチェックと、拡張子の確認
         # OKなら１、だめなら0
         return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
-
+    
     return app
 
 app = create_app()
