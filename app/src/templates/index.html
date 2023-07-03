@@ -7,6 +7,11 @@
 {% block content %}
 <h2>データ一覧</h2>
 
+<!-- app.pyの関数で渡されたリストtagsをここで拾っています。forで取り出しボタンにして表示します。 -->
+{% for tag in tags %}
+    <button type="button">{{ tag }}</button>
+{% endfor %}
+
 {% for user in users %}
 
 <h3><a href="/{{user.id}}/contents" role="button">{{ user.title }}</a></h4>
@@ -15,6 +20,7 @@
     <p>更新日時 : {{ user.updateTime }} /</p>
     <p>データID : {{ user.id }}</p>
     <p>ImagePath : {{ user.image_url }}</p>
+    <p>タグ : {{ user.tag }}</p>
 </div>
 <a href="/{{user.id}}/update" role="button">編集</a>
 <hr>
