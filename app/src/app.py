@@ -6,7 +6,7 @@ from flask import request
 
 # ファイル名をチェックする関数
 from werkzeug.utils import secure_filename
-import datetime
+from sqlalchemy import desc
 import os
 
 def create_app():
@@ -20,13 +20,19 @@ def create_app():
     # アップロードされる拡張子の制限
     ALLOWED_EXTENSIONS = set(["png", "jpg", "gif"])
 
+    tagList = []
+
     init_db(app)
 
 #「/」へアクセスがあった場合に、「index.html」を返す
     @app.route("/")
     def show():
         users = Todo.query.all()
-        return render_template("index.html",pageTitle = "ブログ一覧",users=users)
+        todos = Todo.query.order_by(desc(Todo.createTime))
+        tags = list(set([todo.tag for todo in todos]))
+        return render_template("index.html",pageTitle = "ブログ一覧",users=users,tags=tags)
+        #return render_template("index.html",pageTitle = "ブログ一覧",users=users)
+
 
     @app.route("/add", methods=["GET","POST"])
     def add():
@@ -37,11 +43,12 @@ def create_app():
         elif request.method == "POST":
             title = request.form.get("title")
             body = request.form.get("body")
+            tag = request.form.get("add-tag")
 
             # ファイルがなかった場合の処理
             if "file" not in request.files:
                 filename = "No selected file"
-                userData = Todo(title=title , body=body,image_url=filename)
+                userData = Todo(title=title , body=body,image_url=filename,tag=tag)
 
                 db.session.add(userData)
                 db.session.commit()
@@ -52,7 +59,7 @@ def create_app():
 
             if file.filename == '':
                 filename = "No selected file"
-                userData = Todo(title=title , body=body,image_url=filename)
+                userData = Todo(title=title , body=body,image_url=filename,tag=tag)
             
                 db.session.add(userData)
                 db.session.commit()
@@ -64,7 +71,7 @@ def create_app():
                 # ファイルの保存
                 file.save(os.path.join(UPLOAD_FOLDER, filename))
             
-                userData = Todo(title=title , body=body,image_url=filename)
+                userData = Todo(title=title , body=body,image_url=filename,tag=tag)
             
                 db.session.add(userData)
                 db.session.commit()
