@@ -5,26 +5,40 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h2>データ一覧</h2>
-
 <!-- app.pyの関数で渡されたリストtagsをここで拾っています。forで取り出しボタンにして表示します。 -->
+<!-- <div class="tag-group">
 {% for tag in tags %}
-    <button type="button">{{ tag }}</button>
-{% endfor %}
+<a href="{{ url_for('search_tag', tag=tag)}}"><button type="button" class="tag-button">{{ tag }}</button></a>
+{% endfor %}  
+</div> -->
 
-{% for user in users %}
+<div class="groups-view">    
+    <div class="contents-grid-view">
+    {% for user in users %}
+        <div class="date-group">
+        <h3><a href="/{{user.id}}/contents" role="button">{{ user.title }}</a></h4>
+            <!-- <p>作成日時 : {{ user.createTime }} /</p>
+            <p>更新日時 : {{ user.updateTime }} /</p>
+            <p>データID : {{ user.id }}</p>
+            <p>ImagePath : {{ user.image_url }}</p> -->
+            <p>タグ : {{ user.tag }}</p>
+            <img src="{{ user.image_url }}" alt="画像" class="display-img">
+            <a href="/{{user.id}}/update" role="button">編集</a>
+        </div>
+        <!-- <hr> -->
+    {% endfor %}
+    </div>
 
-<h3><a href="/{{user.id}}/contents" role="button">{{ user.title }}</a></h4>
-<div class="date-group">
-    <p>作成日時 : {{ user.createTime }} /</p>
-    <p>更新日時 : {{ user.updateTime }} /</p>
-    <p>データID : {{ user.id }}</p>
-    <p>ImagePath : {{ user.image_url }}</p>
-    <p>タグ : {{ user.tag }}</p>
+        <nav>
+        <ul class="tag-group">
+            <p>タグ検索</p>
+            {% for tag in tags %}
+            <li><a href="{{ url_for('search_tag', tag=tag)}}" class="tag-button">{{ tag }}</a></li>
+            {% endfor %}  
+        </ul>
+    </nav>
 </div>
-<a href="/{{user.id}}/update" role="button">編集</a>
-<hr>
-{% endfor %}
+
     <!-- <table>
         <tr>
             <th>ID</th>
