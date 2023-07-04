@@ -15,6 +15,10 @@ table td{
 }
 
 /* ----- layout.html ナビゲーションバー部分 ----- */
+
+.contents-group{
+    margin-bottom: 80px;
+}
 /* 要素の幅が中身と同じになり、要素を横並びにする */
 .main-menu li{
     display: inline-block;
@@ -34,14 +38,14 @@ table td{
     }
 
 /* メニューとしての形を整えるために簡単な装飾 */
-    nav{
-        text-align: center;
-        background: #fff2e3;
-        }
+.main-menu-parent{
+    text-align: center;
+    background:#c3f0df;
+}
         
-        nav ul li a:hover{
-        color: orange;
-        }
+.main-menu-parent ul li a:hover{
+    color: rgb(72, 149, 140);
+}
 
 .layout-title{
     font-size: 30px;
@@ -52,14 +56,64 @@ body {
     width: 95%;
     /* max-width: 1280px; */
     margin: auto; /* bodyの外側の余白を指定する */
+    background: rgb(244, 252, 229);
 }
 
-.contents-group{
-    margin-bottom: 80px;
+/* -----　index.html関係　----- */
+
+.groups-view{
+    display:flex;
+    padding: 20px;
+}
+/* タグ一覧 */
+/* リスト先頭のマークを無しにする */
+.tag-group {
+    list-style-type: none;
+    margin: 10px;
+    width: 400px;
+    height: 1000px;
+    padding: 10px;
 }
 
+.tag-group li{
+    display: inline-block;
+    width: auto;
+}
+
+/* リンクの下線を無しにする */
+.tag-group li a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 15px;
+    }
+
+.tag-button{
+    display: inline-block;
+    background: rgb(138, 223, 197);
+    color: #fff; 
+    padding: 8px 10px; 
+    margin: 2px;
+    text-decoration: none; 
+    border-radius: 30px;
+}
+
+.contents-grid-view{
+    display: grid;
+    grid-template-columns: 400px 400px 400px;
+    grid-template-rows: 600px 600px 600px;
+    justify-items: center;
+    align-items: center;
+}
+
+/* コンテンツ一つに対してのレイアウト設定 */
 .date-group{
     display:flex;
+    flex-direction:column;
+    width: 350px;
+    background-color: rgb(255, 255, 255);
+    margin: 10px;
+    padding: 20px;
+    border-radius: 30px;
 }
 
 .date-group p{
@@ -71,16 +125,22 @@ body {
     text-decoration: solid;
 }
 
-hr{
+.display-img{
+    width: 350px;
+    height: 350px;
+    object-fit: cover;
+}
+
+/* hr{
     border: none;
     border-top: 2px dotted #999999;
-}
+} */
 
 footer{
     position: fixed;/*←絶対位置*/
     bottom: 0; /*下に固定*/
     text-align: center;
-    background: #fff2e3;
+    background: #c3f0df;
     width:95%;
     margin: auto; /* bodyの外側の余白を指定する */
     /* padding: 0px 10px; */
@@ -102,29 +162,4 @@ footer{
 .failed{
     color:red;
     text-decoration: none;
-}
-
-/* 追加画面のタグ部分 */
-.tag-label {
-    position: relative;
-}
-
-input[type='checkbox'] {
-    position: absolute;
-    width: 0;
-    height: 0;
-}
-
-.tag-base{
-    color: #999999;
-    padding: 4px 12px;
-    display:inline-block;
-    border-radius: 16px;
-    height: 25px;
-    background-color: #ddd;
-}
-
-input:checked ~ .tag-base {
-    color: rgb(54, 121, 69);
-    background-color: rgb(113, 223, 139);
 }
