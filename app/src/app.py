@@ -29,7 +29,8 @@ def create_app():
     def show():
         users = Todo.query.all()
         todos = Todo.query.order_by(desc(Todo.createTime))
-        tags = list(set([todo.tag for todo in todos]))
+        tags = set(tagList)
+        #tags = list(set([todo.tag for todo in todos]))
         return render_template("index.html",pageTitle = "ブログ一覧",users=users,tags=tags)
         #return render_template("index.html",pageTitle = "ブログ一覧",users=users)
 
@@ -44,6 +45,11 @@ def create_app():
             title = request.form.get("title")
             body = request.form.get("body")
             tag = request.form.get("add-tag")
+
+            if not tag:
+                print('NULL')
+            else:
+                tagList.append(tag)
 
             # ファイルがなかった場合の処理
             if "file" not in request.files:
