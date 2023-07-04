@@ -117,7 +117,8 @@ body {
 }
 
 .date-group p{
-    padding-right: 10px;
+
+    /* padding: 10px; */
 }
 
 .contents-body p {
@@ -125,6 +126,13 @@ body {
     text-decoration: solid;
 }
 
+.createTime-text{
+    padding-left: 30px; /* 画像の配置場所を確保 */
+    background-image: url("image/createTime.png");
+    background-position: left center; /* 画像の位置 */
+    background-size: 20px 20px; /* 画像のサイズ */
+    background-repeat: no-repeat; /* 背景画像の繰り返しなくす */
+}
 .display-img{
     width: 350px;
     height: 350px;

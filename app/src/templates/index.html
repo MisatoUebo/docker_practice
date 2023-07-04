@@ -17,8 +17,9 @@
     {% for user in users %}
         <div class="date-group">
         <h3><a href="/{{user.id}}/contents" role="button">{{ user.title }}</a></h4>
-            <!-- <p>作成日時 : {{ user.createTime }} /</p>
-            <p>更新日時 : {{ user.updateTime }} /</p>
+            <p class="createTime-text">{{ user.createTime }}</p>
+            
+            <!-- <p>更新日時 : {{ user.updateTime }} /</p>
             <p>データID : {{ user.id }}</p>
             <p>ImagePath : {{ user.image_url }}</p> -->
             <p>タグ : {{ user.tag }}</p>
