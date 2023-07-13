@@ -1,3 +1,15 @@
+header{
+    background: rgb(255, 255, 255);
+}
+
+body {
+    width: 100%;
+    /* max-width: 1280px; */
+    margin: auto; /* bodyの外側の余白を指定する */
+    /* background: rgb(244, 252, 229); */
+    background: rgb(235, 223, 211);
+}
+
 table{
     border-collapse:collapse;
     border: 1px solid #333;
@@ -40,24 +52,20 @@ table td{
 /* メニューとしての形を整えるために簡単な装飾 */
 .main-menu-parent{
     text-align: center;
-    background:#c3f0df;
+    background:#ffb46e;
+    padding: 5px;
 }
         
 .main-menu-parent ul li a:hover{
-    color: rgb(72, 149, 140);
+    color: rgb(141, 96, 62);
 }
 
 .layout-title{
-    font-size: 30px;
+    font-size: 25px;
     text-align: center;
+    padding: 10px;
 }
 
-body {
-    width: 95%;
-    /* max-width: 1280px; */
-    margin: auto; /* bodyの外側の余白を指定する */
-    background: rgb(244, 252, 229);
-}
 
 /* -----　index.html関係　----- */
 
@@ -89,7 +97,7 @@ body {
 
 .tag-button{
     display: inline-block;
-    background: rgb(138, 223, 197);
+    background: rgb(255, 145, 34);
     color: #fff; 
     padding: 8px 10px; 
     margin: 2px;
@@ -110,20 +118,32 @@ body {
     display:flex;
     flex-direction:column;
     width: 350px;
-    background-color: rgb(255, 255, 255);
-    margin: 10px;
-    padding: 20px;
-    border-radius: 30px;
+    /* background-color: rgb(255, 200, 200); */
+    /* margin: 10px; */
+    padding: 10px;
+}
+
+.date-group a{
+    text-decoration: none;
 }
 
 .date-group p{
+    margin: 5px;
+}
 
-    /* padding: 10px; */
+.date-group p a{
+    font-size: 20px;
 }
 
 .contents-body p {
     white-space: pre-wrap;
     text-decoration: solid;
+}
+
+.display-title{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .createTime-text{
@@ -144,15 +164,20 @@ body {
     border-top: 2px dotted #999999;
 } */
 
+
+/* add.html */
+.form-group{
+    margin: 20px 10px;
+}
+
+
 footer{
-    position: fixed;/*←絶対位置*/
-    bottom: 0; /*下に固定*/
+    /* position: fixed;*/
+    bottom: 0;
     text-align: center;
-    background: #c3f0df;
-    width:95%;
-    margin: auto; /* bodyの外側の余白を指定する */
-    /* padding: 0px 10px; */
-    /* max-width: 1280px; */
+    background: #ffb46e;
+    /* width:100%; */
+    padding: 5px;
 }
 
 /* flaskメッセージの色指定 */

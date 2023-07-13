@@ -2,26 +2,30 @@
 <html>
 <head>
     <link rel="stylesheet" href="../static/style.css">
+    <script type="text/javascript" src="{{ url_for('static', filename='style.js') }}"></script>
     <title>{{ pageTitle }}</title>
 </head>
+
 <body>
-    <h1 class="layout-title">Webアプリ初心者のFlaskチュートリアル</h1>
-
-    <nav class="main-menu-parent">
-        <ul class="main-menu">
-        <li><a href="/">データ一覧</a></li>
-        <li><a href="/add">新規データ追加</a></li>
-        <li><a href="/delete">登録データ削除</a></li>
-        </ul>
-    </nav>
-
+    <header>
+        <h1 class="layout-title">Webアプリ初心者のFlaskチュートリアル</h1>
+    
+        <nav class="main-menu-parent">
+            <ul class="main-menu">
+            <li><a href="/">データ一覧</a></li>
+            <li><a href="/add">新規データ追加</a></li>
+            <li><a href="/delete">登録データ削除</a></li>
+            </ul>
+        </nav>
+    </header>
     <div class="contents-group">
         {% block content %}
         <!-- main-->
         {% endblock %}
     </div>
+    <footer>
+        <p>© 2023 Uebo Misato.</p>
+    </footer>
 </body>
-<footer>
-    <p>© 2023 Uebo Misato.</p>
-</footer>
+
 </html>

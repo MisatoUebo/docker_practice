@@ -16,13 +16,12 @@
     <div class="contents-grid-view">
     {% for user in users %}
         <div class="date-group">
-        <h3><a href="/{{user.id}}/contents" role="button">{{ user.title }}</a></h4>
+            <p><a href="/{{user.id}}/contents" role="button" class="display-title">{{ user.title }}</a></p>
             <p class="createTime-text">{{ user.createTime }}</p>
-            
             <!-- <p>更新日時 : {{ user.updateTime }} /</p>
             <p>データID : {{ user.id }}</p>
             <p>ImagePath : {{ user.image_url }}</p> -->
-            <p>タグ : {{ user.tag }}</p>
+            <p>{{ user.tag }}</p>
             <img src="{{ user.image_url }}" alt="画像" class="display-img">
             <a href="/{{user.id}}/update" role="button">編集</a>
         </div>

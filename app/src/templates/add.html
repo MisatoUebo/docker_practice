@@ -8,6 +8,9 @@
     <div class="form-group">
         <label for="title">タイトル</label><br>
         <input type="text" name="title">
+
+        <!-- <input type="text" name="title" maxlength="18" onkeyup="ShowLength(value);"> -->
+        <!-- <p id="inputlength">0/18</p> -->
     </div>
     <div class="form-group">
         <label for="body">本文</label><br>
@@ -15,14 +18,15 @@
     </div>
 
     <div class="form-group">
-        <label for="title">追加するタグ</label><br>
+        <label for="tag">タグ</label><br>
         <input type="text" name="add-tag">
     </div>
 
-    <div>
+    <div class="form-group">
         <p><input type="file" name = "file">
-        <input type="submit" value="追加">
     </div>
+
+    <input type="submit" value="コンテンツ追加">
 
 </form>
 {% endblock %}

@@ -132,6 +132,13 @@ def create_app():
         else:
             post.title=request.form.get("title")
             post.body=request.form.get("body")
+            post.tag=request.form.get("add-tag")
+            
+            if not post.tag:
+                print('NULL')
+            else:
+                tagList.append(post.tag)
+            
             db.session.commit()
             return redirect("/")
         
