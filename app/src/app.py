@@ -2,6 +2,7 @@
 from flask import Flask,render_template,redirect,flash
 from database import init_db,db
 from models import Todo
+from models import Tag
 from flask import request
 
 # ファイル名をチェックする関数
@@ -20,8 +21,6 @@ def create_app():
     # アップロードされる拡張子の制限
     ALLOWED_EXTENSIONS = set(["png", "jpg", "gif"])
 
-    tagList = []
-
     init_db(app)
 
 #「/」へアクセスがあった場合に、「index.html」を返す
@@ -30,17 +29,20 @@ def create_app():
         if request.method == "GET":
             users = Todo.query.all()
             #todos = Todo.query.order_by(desc(Todo.createTime))
-            tags = set(tagList)
+            tags = Tag.query.with_entities(Tag.tag).all()
+            tagsData = set(tags)
             #tags = list(set([todo.tag for todo in todos]))
 
-            return render_template("index.html",pageTitle = "ブログ一覧",users=users,tags=tags)
+            return render_template("index.html",pageTitle = "ブログ一覧",users=users,tags=tagsData)
             #return render_template("index.html",pageTitle = "ブログ一覧",users=users)
 
     @app.route('/index/<tag>')
     def search_tag(tag):
-        tags = set(tagList)
+        # tags = set(tagList)
+        tags = Tag.query.with_entities(Tag.tag).all()
+        tagsData = set(tags)
         sort_users = Todo.query.filter(Todo.tag == tag).order_by(desc(Todo.createTime))
-        return render_template('index.html', pageTitle = "ブログ一覧",users=sort_users,tags=tags)
+        return render_template('index.html', pageTitle = "ブログ一覧",users=sort_users,tags=tagsData)
 
     @app.route("/add", methods=["GET","POST"])
     def add():
@@ -56,7 +58,10 @@ def create_app():
             if not tag:
                 print('NULL')
             else:
-                tagList.append(tag)
+                # tagList.append(tag)
+                tagsData = Tag(tag=tag)
+                db.session.add(tagsData)
+                db.session.commit()
 
             # ファイルがなかった場合の処理
             if "file" not in request.files:
@@ -137,7 +142,10 @@ def create_app():
             if not post.tag:
                 print('NULL')
             else:
-                tagList.append(post.tag)
+                # tagList.append(post.tag)
+                tagsData = Tag(tag=post.tag)
+                db.session.add(tagsData)
+                db.session.commit()
             
             db.session.commit()
             return redirect("/")

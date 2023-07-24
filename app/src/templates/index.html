@@ -33,7 +33,7 @@
         <ul class="tag-group">
             <p>タグ検索</p>
             {% for tag in tags %}
-            <li><a href="{{ url_for('search_tag', tag=tag)}}" class="tag-button">{{ tag }}</a></li>
+            <li><a href="{{ url_for('search_tag', tag=tag.tag)}}" class="tag-button">{{ tag.tag }}</a></li>
             {% endfor %}  
         </ul>
     </nav>
