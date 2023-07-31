@@ -28,17 +28,13 @@ def create_app():
     def show():
         if request.method == "GET":
             users = Todo.query.all()
-            #todos = Todo.query.order_by(desc(Todo.createTime))
             tags = Tag.query.with_entities(Tag.tag).all()
             tagsData = set(tags)
-            #tags = list(set([todo.tag for todo in todos]))
 
             return render_template("index.html",pageTitle = "ブログ一覧",users=users,tags=tagsData)
-            #return render_template("index.html",pageTitle = "ブログ一覧",users=users)
 
     @app.route('/index/<tag>')
     def search_tag(tag):
-        # tags = set(tagList)
         tags = Tag.query.with_entities(Tag.tag).all()
         tagsData = set(tags)
         sort_users = Todo.query.filter(Todo.tag == tag).order_by(desc(Todo.createTime))
@@ -58,7 +54,6 @@ def create_app():
             if not tag:
                 print('NULL')
             else:
-                # tagList.append(tag)
                 tagsData = Tag(tag=tag)
                 db.session.add(tagsData)
                 db.session.commit()
@@ -80,7 +75,6 @@ def create_app():
                 filename = "None.png"
                 image_url = os.path.join(DISPLAY_FOLDER, filename)
                 userData = Todo(title=title , body=body,image_url=image_url,tag=tag)
-                # userData = Todo(title=title , body=body,image_url=filename,tag=tag)
             
                 db.session.add(userData)
                 db.session.commit()
